@@ -27,7 +27,7 @@ def zero_one(var):
 def get_robot_feature_data():
     if debug_messages : print("Runninng get_robot_feature_data function")
     print("stop light (0 or 1):") #gets user input
-    if zero_one(var = input("red: ")) == 1
+    if zero_one(var = input("red: ")) == 1:
         continue
     red_status = var #gets user input for LED value (0 or 1)
     yellow_status = int(input("yellow: "))
