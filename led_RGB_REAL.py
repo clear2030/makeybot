@@ -36,7 +36,7 @@ def eyes_RGB(eyes_status):
     blueR.value = eyes_status[1][blue2]
 
 def main():
-    while true:
+    while True:
         print("Welcome To The Makey Bot")
         eyes_RGBLEDs = [{'redL':0, 'greenL':0, 'blueL':0}, {'redR':0, 'greenR':0, 'blueR':0}]
         print("left eye:")
