@@ -19,15 +19,16 @@ greenR = PWMLED(19)
 blueR = PWMLED(13)
 
 def zero_one(var):
-    if var != (0 or 1):
-        print("Not 0 or 1")
+    if var != (0 and 1):
+        print("Not 0 or 1, Try Again")
         return "error"
     return
 
 def get_robot_feature_data():
     if debug_messages : print("Runninng get_robot_feature_data function")
     print("stop light (0 or 1):") #gets user input
-    if zero_one(var = input("red: ")) == "error":
+    var = input("red: ")
+    if zero_one(var) == "error":
         return ["error","error","error"]
     red_status = var #gets user input for LED value (0 or 1)
     yellow_status = int(input("yellow: "))
@@ -76,9 +77,9 @@ def eyes_RGB(eyes_status):
 
 def main():
     while True:
-        print("Welcome To The Makey Bot")
+        #print("Welcome To The Makey Bot")
         stop_light_dict, left_eye_dict, right_eye_dict = get_robot_feature_data()
-        if stop_light_dict = "error":
+        if stop_light_dict == "error":
             continue
         #traffic_light["red_LED"] = red_status #changes the value in the dictionary
         #traffic_light["yellow_LED"] = yellow_status
