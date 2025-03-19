@@ -1,0 +1,101 @@
+from gpiozero import LED
+from gpiozero import PWMLED
+import time
+
+# Debug Settings
+debug_messages = 1 # If debug messages is 1 then message will be printed, else if 0 they will be silenced
+if debug_messages : print("Debug Message are 'ON'")
+else : print("Debug Message are 'OFF'")
+
+# Raspberry Pi Pins
+red_LED = LED(3) #sets LEDs to pins
+yellow_LED = LED(27)
+green_LED = LED(10)
+redL = PWMLED(6) 
+greenL = PWMLED(5) 
+blueL = PWMLED(0)
+redR = PWMLED(26)
+greenR = PWMLED(19)
+blueR = PWMLED(13)
+
+def get_robot_feature_data():
+    if debug_messages : print("Runninng get_robot_feature_data function")
+    print("stop light:") #gets user input
+    red_status = float(input("red: ")) #gets user input for LED value (0 or 1)
+    yellow_status = float(input("yellow: "))
+    green_status = float(input("green: "))
+    print("left eye:")
+    redL_status = float(input("red: ")) #gets user input for LED value (0 to 1)
+    greenL_status = float(input("green: "))
+    blueL_status = float(input("blue: "))
+    print("right eye:")
+    redR_status = float(input("red: ")) #gets user input for LED value (0 to 1)
+    greenR_status = float(input("green: "))
+    blueR_status = float(input("blue: "))
+    stop_light = {'red_LED':red_status, 'yellow_LED':yellow_status, 'green_LED':green_status} #declares dictionaries and initializes it with user input
+    left_eye = {'redL':redL_status, 'greenL':greenL_status, 'blueL':blueL_status}
+    right_eye =  {'redR':redR_status, 'greenR':greenR_status, 'blueR':blueR_status}
+    # servo
+    rfd = [stop_light, left_eye, right_eye]
+    if debug_messages : print(rfd)
+    if debug_messages : print("Returning get_robot_feature_data function")
+    return(rfd)
+            
+def eyes_RGB(eyes_status):
+    if debug_messages : print("Running eyes_RGB function")
+    if debug_messages : print(eyes_status)
+    left,right = eyes_status
+    red,green,blue = left
+    red2,green2,blue2 = right
+    redL.value = eyes_status[0][red]
+    greenL.value = eyes_status[0][green]
+    blueL.value = eyes_status[0][blue]
+    redR.value = eyes_status[1][red2]
+    greenR.value = eyes_status[1][green2]
+    blueR.value = eyes_status[1][blue2]
+
+def on_off(var): #function that actually turns the LEDs on and off
+    if traffic_light[var] == 0:
+        eval(var + ".off()") #uses eval function to turn strings into python commmands
+    else:
+        eval(var + ".on()")
+
+def stop_light(stop_light_data): #function that turns the LEDs on and off
+    red,yellow,green = stop_light_data #sets dictionary keys to variables
+    on_off(red)
+    on_off(yellow)
+    on_off(green)
+
+def main():
+    while True:
+        print("Welcome To The Makey Bot")
+        stop_light_dict, left_eye_dict, right_eye_dict = get_robot_feature_data()
+        #traffic_light["red_LED"] = red_status #changes the value in the dictionary
+        #traffic_light["yellow_LED"] = yellow_status
+        #traffic_light["green_LED"] = green_status
+        #print(traffic_light)
+        #stop_light("red_LED") #calls the function to turn on/off the LED
+        #stop_light("yellow_LED")
+        #stop_light("green_LED")
+        #eyes_RGBLEDs = [{'redL':0, 'greenL':0, 'blueL':0}, {'redR':0, 'greenR':0, 'blueR':0}]
+        #eyes_RGBLEDs[0]["redL"] = redL_status #changes the value in the dictionary
+        #eyes_RGBLEDs[0]["greenL"] = greenL_status
+        #eyes_RGBLEDs[0]["blueL"] = blueL_status
+        #eyes_RGBLEDs[1]["redR"] = redR_status
+        #eyes_RGBLEDs[1]["greenR"] = greenR_status
+        #eyes_RGBLEDs[1]["blueR"] = blueR_status
+        #print(eyes_RGBLEDs)
+        
+        if debug_messages : print(stop_light_dict)
+        if debug_messages : print(left_eye_dict)
+        if debug_messages : print(right_eye_dict)
+
+        if debug_messages : print("Calling stop_light function")
+        stop_light(stop_light_dict)
+        if debug_messages : print("Returned from stop_light function")
+
+        if debug_messages : print("Calling eyes_RGB function")
+        eyes_RGB([left_eye_dict,right_eye_dict])
+        if debug_messages : print("Returned from eyes_RGB function")
+        
+main()
