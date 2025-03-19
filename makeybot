@@ -40,7 +40,19 @@ def get_robot_feature_data():
     if debug_messages : print(rfd)
     if debug_messages : print("Returning get_robot_feature_data function")
     return(rfd)
-            
+
+def on_off(dict,var): #function that actually turns the LEDs on and off
+    if stop_light_data[var] == 0:
+        eval(var + ".off()") #uses eval function to turn strings into python commmands
+    else:
+        eval(var + ".on()")
+
+def stop_light(stop_light_data): #function that turns the LEDs on and off
+    red,yellow,green = stop_light_data #sets dictionary keys to variables
+    on_off(stop_light_data,red)
+    on_off(stop_light_data,yellow)
+    on_off(stop_light_data,green)
+
 def eyes_RGB(eyes_status):
     if debug_messages : print("Running eyes_RGB function")
     if debug_messages : print(eyes_status)
@@ -53,18 +65,6 @@ def eyes_RGB(eyes_status):
     redR.value = eyes_status[1][red2]
     greenR.value = eyes_status[1][green2]
     blueR.value = eyes_status[1][blue2]
-
-def on_off(var): #function that actually turns the LEDs on and off
-    if traffic_light[var] == 0:
-        eval(var + ".off()") #uses eval function to turn strings into python commmands
-    else:
-        eval(var + ".on()")
-
-def stop_light(stop_light_data): #function that turns the LEDs on and off
-    red,yellow,green = stop_light_data #sets dictionary keys to variables
-    on_off(red)
-    on_off(yellow)
-    on_off(green)
 
 def main():
     while True:
