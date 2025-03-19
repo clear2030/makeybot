@@ -18,19 +18,20 @@ redR = PWMLED(26)
 greenR = PWMLED(19)
 blueR = PWMLED(13)
 
-def zero_one(var):
-    if var != (0 and 1):
+def zero_one(var): #error code
+    if str(var) != "0" and str(var) != "1":
         print("Not 0 or 1, Try Again")
+        print()
         return "error"
     return
 
 def get_robot_feature_data():
     if debug_messages : print("Runninng get_robot_feature_data function")
     print("stop light (0 or 1):") #gets user input
-    var = input("red: ")
+    var = input("red: ") #error code
     if zero_one(var) == "error":
-        return ["error","error","error"]
-    red_status = var #gets user input for LED value (0 or 1)
+        return ["error","error","error"] #end of error code
+    red_status = int(var) #gets user input for LED value (0 or 1)
     yellow_status = int(input("yellow: "))
     green_status = int(input("green: "))
     print("left eye (0 - 1):")
