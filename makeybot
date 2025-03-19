@@ -42,7 +42,7 @@ def get_robot_feature_data():
     return(rfd)
 
 def on_off(dict,var): #function that actually turns the LEDs on and off
-    if stop_light_data[var] == 0:
+    if dict[var] == 0:
         eval(var + ".off()") #uses eval function to turn strings into python commmands
     else:
         eval(var + ".on()")
