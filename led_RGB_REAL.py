@@ -40,13 +40,13 @@ def main():
         print("Welcome To The Makey Bot")
         eyes_RGBLEDs = [{'redL':0, 'greenL':0, 'blueL':0}, {'redR':0, 'greenR':0, 'blueR':0}]
         print("left eye:")
-        redL_status = int(input("red: ")) #gets user input for LED value (0 to 1)
-        greenL_status = int(input("green: "))
-        blueL_status = int(input("blue: "))
+        redL_status = float(input("red: ")) #gets user input for LED value (0 to 1)
+        greenL_status = float(input("green: "))
+        blueL_status = float(input("blue: "))
         print("right eye:")
-        redR_status = int(input("red: ")) #gets user input for LED value (0 to 1)
-        greenR_status = int(input("green: "))
-        blueR_status = int(input("blue: "))
+        redR_status = float(input("red: ")) #gets user input for LED value (0 to 1)
+        greenR_status = float(input("green: "))
+        blueR_status = float(input("blue: "))
         eyes_RGBLEDs[0]["redL"] = redL_status #changes the value in the dictionary
         eyes_RGBLEDs[0]["greenL"] = greenL_status
         eyes_RGBLEDs[0]["blueL"] = blueL_status
