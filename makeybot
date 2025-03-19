@@ -18,17 +18,24 @@ redR = PWMLED(26)
 greenR = PWMLED(19)
 blueR = PWMLED(13)
 
+def zero_one(var):
+    if var != (0 or 1):
+        print("Not 0 or 1")
+        return continue
+    return
+
 def get_robot_feature_data():
     if debug_messages : print("Runninng get_robot_feature_data function")
-    print("stop light:") #gets user input
-    red_status = float(input("red: ")) #gets user input for LED value (0 or 1)
-    yellow_status = float(input("yellow: "))
-    green_status = float(input("green: "))
-    print("left eye:")
+    print("stop light (0 or 1):") #gets user input
+    zero_one(var = input("red: "))
+    red_status = var #gets user input for LED value (0 or 1)
+    yellow_status = int(input("yellow: "))
+    green_status = int(input("green: "))
+    print("left eye (0 - 1):")
     redL_status = float(input("red: ")) #gets user input for LED value (0 to 1)
     greenL_status = float(input("green: "))
     blueL_status = float(input("blue: "))
-    print("right eye:")
+    print("right eye (0 - 1):")
     redR_status = float(input("red: ")) #gets user input for LED value (0 to 1)
     greenR_status = float(input("green: "))
     blueR_status = float(input("blue: "))
