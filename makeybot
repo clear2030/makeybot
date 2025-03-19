@@ -32,7 +32,13 @@ def get_robot_feature_data():
     if zero_one(var) == "error":
         return ["error","error","error"] #end of error code
     red_status = int(var) #gets user input for LED value (0 or 1)
+    var = input("yellow: ") #more error code
+    if zero_one(var) == "error":
+        return ["error","error","error"] #end of more error code
     yellow_status = int(input("yellow: "))
+    var = input("green: ") #more error code
+    if zero_one(var) == "error":
+        return ["error","error","error"] #end of more error code
     green_status = int(input("green: "))
     print("left eye (0 - 1):")
     redL_status = float(input("red: ")) #gets user input for LED value (0 to 1)
