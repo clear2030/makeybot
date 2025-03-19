@@ -20,8 +20,19 @@ blueR = PWMLED(13)
 
 def zero_one(var): #error code
     if str(var) != "0" and str(var) != "1":
-        print("Not 0 or 1, Try Again")
+        print("Not the number 0 or 1, Try Again")
         print()
+        return "error"
+    return
+
+def zero_to_one(var): #error code for eyes
+    try:
+        var = floar(var)
+        if !(var > 0 and var < 1):
+            print("Not a number between 0 and 1, Try Again")
+            print()
+            return "error"
+    except:
         return "error"
     return
 
@@ -35,19 +46,37 @@ def get_robot_feature_data():
     var = input("yellow: ") #more error code
     if zero_one(var) == "error":
         return ["error","error","error"] #end of more error code
-    yellow_status = int(input("yellow: "))
+    yellow_status = int(var)
     var = input("green: ") #more error code
     if zero_one(var) == "error":
         return ["error","error","error"] #end of more error code
-    green_status = int(input("green: "))
+    green_status = int(var)
     print("left eye (0 - 1):")
-    redL_status = float(input("red: ")) #gets user input for LED value (0 to 1)
-    greenL_status = float(input("green: "))
-    blueL_status = float(input("blue: "))
+    var = input("red: ") #more error code
+    if zero_to_one(var) == "error":
+        return ["error","error","error"] #end of more error code
+    redL_status = float(var) #gets user input for LED value (0 to 1)
+    var = input("green: ") #more error code
+    if zero_to_one(var) == "error":
+        return ["error","error","error"] #end of more error code
+    greenL_status = float(var)
+    var = input("blue: ") #more error code
+    if zero_to_one(var) == "error":
+        return ["error","error","error"] #end of more error code
+    blueL_status = float(var)
     print("right eye (0 - 1):")
-    redR_status = float(input("red: ")) #gets user input for LED value (0 to 1)
-    greenR_status = float(input("green: "))
-    blueR_status = float(input("blue: "))
+    var = input("red: ") #more error code
+    if zero_to_one(var) == "error":
+        return ["error","error","error"] #end of more error code
+    redR_status = float(var) #gets user input for LED value (0 to 1)
+    var = input("green: ") #more error code
+    if zero_to_one(var) == "error":
+        return ["error","error","error"] #end of more error code
+    greenR_status = float(var)
+    var = input("blue: ") #more error code
+    if zero_to_one(var) == "error":
+        return ["error","error","error"] #end of more error code
+    blueR_status = float(var)
     stop_light = {'red_LED':red_status, 'yellow_LED':yellow_status, 'green_LED':green_status} #declares dictionaries and initializes it with user input
     left_eye = {'redL':redL_status, 'greenL':greenL_status, 'blueL':blueL_status}
     right_eye =  {'redR':redR_status, 'greenR':greenR_status, 'blueR':blueR_status}
