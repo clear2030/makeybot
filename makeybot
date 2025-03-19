@@ -97,5 +97,6 @@ def main():
         if debug_messages : print("Calling eyes_RGB function")
         eyes_RGB([left_eye_dict,right_eye_dict])
         if debug_messages : print("Returned from eyes_RGB function")
+        print()
         
 main()
