@@ -28,7 +28,7 @@ def zero_one(var): #error code
 def zero_to_one(var): #error code for eyes
     try:
         var = floar(var)
-        if var !> 0 or var !< 1:
+        if var < 0 or var > 1:
             print("Not a number between 0 and 1, Try Again")
             print()
             return "error"
