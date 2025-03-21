@@ -33,6 +33,8 @@ def zero_to_one(var): #error code for eyes
             print()
             return "error"
     except:
+        print("Not a number between 0 and 1, Try Again")
+        print()
         return "error"
     return
 
