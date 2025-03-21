@@ -115,25 +115,9 @@ def eyes_RGB(eyes_status):
 
 def main():
     while True:
-        #print("Welcome To The Makey Bot")
         stop_light_dict, left_eye_dict, right_eye_dict = get_robot_feature_data()
         if stop_light_dict == "error":
             continue
-        #traffic_light["red_LED"] = red_status #changes the value in the dictionary
-        #traffic_light["yellow_LED"] = yellow_status
-        #traffic_light["green_LED"] = green_status
-        #print(traffic_light)
-        #stop_light("red_LED") #calls the function to turn on/off the LED
-        #stop_light("yellow_LED")
-        #stop_light("green_LED")
-        #eyes_RGBLEDs = [{'redL':0, 'greenL':0, 'blueL':0}, {'redR':0, 'greenR':0, 'blueR':0}]
-        #eyes_RGBLEDs[0]["redL"] = redL_status #changes the value in the dictionary
-        #eyes_RGBLEDs[0]["greenL"] = greenL_status
-        #eyes_RGBLEDs[0]["blueL"] = blueL_status
-        #eyes_RGBLEDs[1]["redR"] = redR_status
-        #eyes_RGBLEDs[1]["greenR"] = greenR_status
-        #eyes_RGBLEDs[1]["blueR"] = blueR_status
-        #print(eyes_RGBLEDs)
         
         if debug_messages : print(stop_light_dict)
         if debug_messages : print(left_eye_dict)
