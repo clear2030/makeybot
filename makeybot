@@ -81,7 +81,7 @@ def get_robot_feature_data():
     #    return ["error","error","error"] #end of more error code
     #blueR_status = float(var)
 
-    hexL = input("left eye hex code:)
+    hexL = input("left eye hex code: ")
     hexL = hexL.upper()
     redL_status = hexL[1:3]
     redL_status = int(redL_status,16)
@@ -93,7 +93,7 @@ def get_robot_feature_data():
     blueL_status = int(blueL_status,16)
     blueL_status = blueL_status/255
 
-    hexR = input("right eye hex code:)
+    hexR = input("right eye hex code: ")
     hexR = hexR.upper()
     redR_status = hexR[1:3]
     redR_status = int(redR_status,16)
