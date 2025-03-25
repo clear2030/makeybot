@@ -1,6 +1,8 @@
 from gpiozero import LED
 from gpiozero import PWMLED
+from gpiozero import Servo
 import time
+from time import sleep
 
 # Debug Settings
 debug_messages = 1 # If debug messages is 1 then message will be printed, else if 0 they will be silenced
@@ -17,6 +19,10 @@ blueL = PWMLED(0)
 redR = PWMLED(26)
 greenR = PWMLED(19)
 blueR = PWMLED(13)
+myCorrection = .45 #servo setup
+maxPW = (2.0+myCorrection)/1000
+minPW = (1.0-myCorrection+.05)/1000
+servo_motor = Servo(21, min_pulse_width = minPW, max_pulse_width = maxPW)
 
 def zero_one(var): #error code
     if str(var) != "0" and str(var) != "1":
@@ -105,11 +111,14 @@ def get_robot_feature_data():
     blueR_status = int(blueR_status,16)
     blueR_status = blueR_status/255
 
+    
+
     stop_light = {'red_LED':red_status, 'yellow_LED':yellow_status, 'green_LED':green_status} #declares dictionaries and initializes it with user input
     left_eye = {'redL':redL_status, 'greenL':greenL_status, 'blueL':blueL_status}
     right_eye =  {'redR':redR_status, 'greenR':greenR_status, 'blueR':blueR_status}
-    # servo
-    rfd = [stop_light, left_eye, right_eye]
+    servo_val = float(input("servo value (-1 to 1): "))
+    
+    rfd = [stop_light, left_eye, right_eye,servo_val]
     if debug_messages : print(rfd)
     if debug_messages : print("Returning get_robot_feature_data function")
     return(rfd)
@@ -138,16 +147,22 @@ def eyes_RGB(eyes_status):
     redR.value = eyes_status[1][red2]
     greenR.value = eyes_status[1][green2]
     blueR.value = eyes_status[1][blue2]
+    
+def head_servo(servo_data):
+    servo_motor.value = servo_data
+    sleep(0.5)
+    servo_motor.detach()
 
 def main():
     while True:
-        stop_light_dict, left_eye_dict, right_eye_dict = get_robot_feature_data()
+        stop_light_dict, left_eye_dict, right_eye_dict, servo_dict = get_robot_feature_data()
         if stop_light_dict == "error":
             continue
         
         if debug_messages : print(stop_light_dict)
         if debug_messages : print(left_eye_dict)
         if debug_messages : print(right_eye_dict)
+        if debug_messages : print(servo_dict)
 
         if debug_messages : print("Calling stop_light function")
         stop_light(stop_light_dict)
@@ -156,6 +171,10 @@ def main():
         if debug_messages : print("Calling eyes_RGB function")
         eyes_RGB([left_eye_dict,right_eye_dict])
         if debug_messages : print("Returned from eyes_RGB function")
+        
+        if debug_messages : print("Calling head_servo function")
+        head_servo(servo_dict)
+        if debug_messages : print("Returned from head_servo function")
         print()
         
 main()
